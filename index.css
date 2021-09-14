@@ -1,0 +1,42 @@
+.toggle.active{
+	background-color: yellow;
+}
+
+.bg-osu{
+	animation-name: fade;
+	animation-duration: 0.5s;
+}
+.bg-ote{
+	background-color: #b2b3f4;
+	animation-name: fade;
+	animation-duration: 0.5s;
+}
+.bg-dor{
+	background-color: #fafb8e;
+	animation-name: fade;
+	animation-duration: 0.5s;
+}
+.bg-sup{
+	background-color: #a0db8e;
+	animation-name: fade;
+	animation-duration: 0.5s;
+}
+.bg-ent{
+	background-color: #ecb495;
+	animation-name: fade;
+	animation-duration: 0.5s;
+}
+.bg-opt{
+	background-color: #cccccc;
+	animation-name: fade;
+	animation-duration: 0.5s;
+}
+
+@keyframes fade{
+  0%{
+    opacity: 0;
+  }
+  100%{
+    opacity: 1;
+  }
+}

@@ -1,0 +1,129 @@
+{"chnum":15}, {"chname":"スピードチャンネル1"},
+{"chnum":16}, {"chname":"スピードチャンネル2"},
+{"chnum":21}, {"chname":"アニマックスSD"},
+{"chnum":22}, {"chname":"えひめ・すこやかチャンネル"},
+{"chnum":23}, {"chname":"えひめ・まなビジョン"},
+{"chnum":100}, {"chname":"プレビュー"},
+{"chnum":105}, {"chname":"ダンスチャンネル"},
+{"chnum":113}, {"chname":"Eおんがくチャンネル"},
+{"chnum":114}, {"chname":"愛顔スポーツチャンネル"},
+{"chnum":115}, {"chname":"ワンダーチャンネル"},
+{"chnum":116}, {"chname":"マチスキチャンネル"},
+{"chnum":117}, {"chname":"マツリ☆チャンネル"},
+{"chnum":118}, {"chname":"NHKワールドJAPAN"},
+{"chnum":119}, {"chname":"ウィットチャンネル"},
+{"chnum":122}, {"chname":"ムービープラスHD"},
+{"chnum":123}, {"chname":"LaLaTV(HD)"},
+{"chnum":124}, {"chname":"スーパー! ドラマTV HD"},
+{"chnum":125}, {"chname":"日本映画専門チャンネルHD"},
+{"chnum":126}, {"chname":"アジアドラマチックＴＶ★HD"},
+{"chnum":127}, {"chname":"衛星劇場HD"},
+{"chnum":129}, {"chname":"ディズニーXD HD"},
+{"chnum":131}, {"chname":"FOX HD"},
+{"chnum":132}, {"chname":"J SPORTS 4 HD"},
+{"chnum":134}, {"chname":"ヒストリーチャンネルHD"},
+{"chnum":135}, {"chname":"チャンネル銀河"},
+{"chnum":136}, {"chname":"テレ朝チャンネル1"},
+{"chnum":137}, {"chname":"フジテレビNEXT"},
+{"chnum":138}, {"chname":"フジテレビONE"},
+{"chnum":139}, {"chname":"フジテレビTWO"},
+{"chnum":140}, {"chname":"ショップチャンネル"},
+{"chnum":141}, {"chname":"ホームドラマチャンネルHD"},
+{"chnum":142}, {"chname":"ナショナル ジオグラフィック"},
+{"chnum":143}, {"chname":"旅チャンネルHD"},
+{"chnum":144}, {"chname":"TBSチャンネル1"},
+{"chnum":145}, {"chname":"釣りビジョンHD"},
+{"chnum":146}, {"chname":"GAORA SPORTS HD"},
+{"chnum":147}, {"chname":"スカイA"},
+{"chnum":148}, {"chname":"AXN HD"},
+{"chnum":149}, {"chname":"アニマックスHD"},
+{"chnum":150}, {"chname":"MTV"},
+{"chnum":151}, {"chname":"チャンネルNECO-HD"},
+{"chnum":152}, {"chname":"TBS NEWS"},
+{"chnum":153}, {"chname":"AXNミステリーHD"},
+{"chnum":154}, {"chname":"タカラヅカ"},
+{"chnum":155}, {"chname":"シネフィルWOWOW"},
+{"chnum":156}, {"chname":"スペースシャワーTV HD"},
+{"chnum":157}, {"chname":"ファミリー劇場HD"},
+{"chnum":158}, {"chname":"J SPORTS 3 HD"},
+{"chnum":159}, {"chname":"時代劇専門チャンネルHD"},
+{"chnum":160}, {"chname":"MONDO TV HD"},
+{"chnum":161}, {"chname":"ミュージック･エア"},
+{"chnum":162}, {"chname":"MUSIC ON! TV HD"},
+{"chnum":163}, {"chname":"キッズステーションHD"},
+{"chnum":164}, {"chname":"グリーンチャンネルHD"},
+{"chnum":165}, {"chname":"グリーンチャンネル2HD"},
+{"chnum":166}, {"chname":"日テレジータスHD"},
+{"chnum":167}, {"chname":"ゴルフネットワークHD"},
+{"chnum":168}, {"chname":"J SPORTS 1 HD"},
+{"chnum":169}, {"chname":"J SPORTS 2 HD"},
+{"chnum":170}, {"chname":"ミュージック・ジャパンTV"},
+{"chnum":171}, {"chname":"カートゥーンネットワークHD"},
+{"chnum":172}, {"chname":"QVC"},
+{"chnum":173}, {"chname":"東映チャンネルHD"},
+{"chnum":174}, {"chname":"ＫＮＴＶ ＨＤ"},
+{"chnum":175}, {"chname":"歌謡ポップスチャンネルHD"},
+{"chnum":176}, {"chname":"TBSチャンネル2"},
+{"chnum":177}, {"chname":"ジャパネットチャンネルDX"},
+{"chnum":178}, {"chname":"CNN/US HD"},
+{"chnum":180}, {"chname":"CNNj "},
+{"chnum":181}, {"chname":"Mnet HD"},
+{"chnum":182}, {"chname":"AT-X HD!"},
+{"chnum":183}, {"chname":"ディズニー・チャンネルHD"},
+{"chnum":185}, {"chname":"日経CNBC HD"},
+{"chnum":187}, {"chname":"エンタメ～テレHD"},
+{"chnum":188}, {"chname":"テレ朝チャンネル2"},
+{"chnum":191}, {"chname":"パチンコ★パチスロTV! HD"},
+{"chnum":192}, {"chname":"ジュエリー☆GSTV"},
+{"chnum":195}, {"chname":"Ｖ☆パラダイスＨＤ"},
+{"chnum":196}, {"chname":"囲碁・将棋チャンネルHD"},
+{"chnum":252}, {"chname":"日テレNEWS24"},
+{"chnum":284}, {"chname":"日テレプラス"},
+{"chnum":291}, {"chname":"レッドチェリー"},
+{"chnum":393}, {"chname":"レインボーチャンネルHD"},
+{"chnum":394}, {"chname":"プレイボーイ チャンネル HD"},
+{"chnum":400}, {"chname":"たうんch4K"},
+{"chnum":401}, {"chname":"ケーブル4K"},
+{"chnum":416}, {"chname":"ショップチャンネル4K"},
+{"chnum":417}, {"chname":"4K QVC"},
+{"chnum":418}, {"chname":"ザ・シネマ4K"},
+
+
+
+
+var oldRow;
+var oldColor;
+
+function trClick(obj)
+{
+var table = document.getElementById('listTable');
+//テーブルがクリックされたときの処理
+//行の色を変える
+//クリックした行数を取得する
+//alert(obj.rowIndex);
+var newRow = obj.rowIndex;
+//行の色を取得する
+//alert(obj.bgColor);
+//クリックした行の色を変える
+if(newRow != oldRow)
+{
+if(oldRow != undefined)
+{
+//前の行の色を戻す
+table.rows[oldRow].style.backgroundColor = oldColor;
+}
+//新しい行の色を取得しoldColorに保存する
+oldColor = obj.bgColor;
+//新しい行の色を変える
+table.rows[newRow].style.backgroundColor = "#80ffff";
+//新しい行の行数をoldRowに保存する
+oldRow = newRow;
+}
+}
+
+list =[
+	{chNum:111},
+	{chName:"aaa"},
+	{chElement:["osusume","dorama&ongaku","option"]},
+	{price(option):1000}
+]
