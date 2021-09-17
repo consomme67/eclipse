@@ -32,6 +32,12 @@
 	animation-duration: 0.5s;
 }
 
+.hit{
+	cursor: pointer;
+}
+.reset_button{
+	text-align: right;
+}
 @keyframes fade{
   0%{
     opacity: 0;

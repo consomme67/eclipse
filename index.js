@@ -1,4 +1,4 @@
-//git用test
+//cssは基本的にbootstrapを使用してます。classで指定
 
 let pool_ch = [];
 
@@ -25,12 +25,15 @@ let option = [];
 let tableEle = document.getElementById('data-table');
 let packDiv = document.getElementById('Available-pack');
 let optDiv = document.getElementById('option-list');
+let psDiv = document.getElementById('ps');
+let priceDiv = document.getElementById('price');
 for (let i = 0; i < ch_list.length; i++) {
 
   	// テーブルの行を 要素分追加したのちcell追加
 	let tr = document.createElement('tr');
 	tr.id = "tableId_" + `${i}`;
 	tr.classList = "toggle";
+	tr.classList.add("hit");
 	tr.onclick = test;
 	//tr.onclick = func(arguments[0]);
 	tableEle.appendChild(tr);
@@ -40,7 +43,14 @@ for (let i = 0; i < ch_list.length; i++) {
 	let td = document.createElement("td");
 
 	th.scope = "row";
-	th.innerHTML = ch_list[i].chnum;
+	if (ch_list[i].chnum < 100){
+		console.log("aaa");
+		th.innerHTML = `0${ch_list[i].chnum}`;
+	}else{
+		console.log("bbb");
+		th.innerHTML = ch_list[i].chnum;	
+	}
+	
 	td.innerHTML = ch_list[i].chname;
 
 	tr.appendChild(th);
@@ -52,6 +62,8 @@ function test(e){
 	
 	packDiv.innerHTML = "";
 	optDiv.innerHTML = "";
+	psDiv.innerHTML = "";
+	priceDiv.innerHTML = "";
 	//console.log(`aaa:${option}`)
 	console.log(e.path[1].id);
 
@@ -80,7 +92,7 @@ function test(e){
 	//CH_list.jsの情報にoptionとその値段追加✓
 	//合計値を出す
 	
-	judge();
+	option = judge();
 	
 	for (let keyname in set_items){
 		if (keyname != 'opt' && judge_items[keyname] == true){
@@ -90,7 +102,13 @@ function test(e){
 		}
 	}
 	
-	console.log(judge_items);
+	let total = price_pack(judge_items) + price_option(option);
+	total = total + (total * 0.1);
+	total = Math.ceil(total);
+	total_div(total);
+	//console.log(total);
+	
+	console.log(option);
 	//create_div();
 }
 
@@ -191,6 +209,9 @@ function judge(){
 	if (option.length != 0){
 		judge_items["opt"] = true;
 	}
+	
+	return option;
+	
 }
 //リストoptionから渡されたリストの値を削除
 function rem_opt(array03){
@@ -285,3 +306,75 @@ function create_div(keyname){
 		option_list.appendChild(div);
 	}
 }
+
+function total_div(price){
+	let div = document.getElementById("price");
+	let p = document.createElement("p");
+	let textnode = document.createTextNode(`合計 ${price}`);
+	p.appendChild(textnode);
+	div.appendChild(p);
+}
+
+function reset_button(){
+	window.location.reload(true);
+}
+
+let f = function (a, b) {
+    return a - b
+}
+
+function price_pack(judge_items){
+	price = 0;
+	let ji = judge_items;
+	for (let key in ji){
+		if(key != "opt" && judge_items[key] == true){
+			price = price + pack_list[key].price
+		}
+	}
+	return price;
+}
+
+function price_option(option_list){
+	let price = 0;
+	let opt = option_list.concat();
+	console.log(`before:${opt}`);
+	opt = opt.sort(f);
+	console.log(`after;${opt}`);
+	for (let i = 0; i < opt.length; i ++){
+		console.log(`a:${i}`);
+		let index = getIndex(opt[i],ch_list,"chnum")
+		if(index == -1){
+			console.log(`Error:${opt[i]}`);
+			continue;
+		}
+		let cl = ch_list[index]
+		if (cl.chelement.option.includes("set")){
+			console.log(`b;${opt[i]}`);
+			let target = cl.chelement.set;
+			console.log(`target:${target}`);
+			if (opt.includes(target)){
+				for (let key in opt){
+					if (opt.includes(target)){
+						let reindex = opt.indexOf(target);
+						
+						opt.splice(reindex, 1);
+					}
+				}
+				price = price + cl.price.set;
+			}else{
+				console.log("d");
+				if (!cl.chelement.option.includes("single")){
+					price = price + cl.price.set;
+				}else{
+					price = price + cl.price.single;
+				}
+				console.log(`d:${price}`);
+			}
+		}else{
+			console.log("c");
+			price = price + cl.price.single;
+		}
+	}
+	return price;
+}
+
