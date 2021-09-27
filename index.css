@@ -46,3 +46,12 @@
     opacity: 1;
   }
 }
+span{
+  writing-mode: vertical-rl;
+  text-orientation: upright;
+  margin: 2px;
+}
+
+td textarea {
+  vertical-align: middle;
+}

@@ -8,6 +8,7 @@ let set_items = {
 	dor:[],
 	sup:[],
 	ent:[],
+	kihon:[],
 	opt:[]
 };
 
@@ -17,9 +18,18 @@ let judge_items = {
 	dor:false,
 	sup:false,
 	ent:false,
+	kihon:false,
 	opt:false
 };
 
+let working_items = {
+	osusume:[],
+	otegaru:[],
+	doraon:[],
+	supobara:[],
+	entame:[],
+	option:[]
+}
 let option = [];
 
 let tableEle = document.getElementById('data-table');
@@ -34,46 +44,104 @@ for (let i = 0; i < ch_list.length; i++) {
 	tr.id = "tableId_" + `${i}`;
 	tr.classList = "toggle";
 	tr.classList.add("hit");
+	tr.classList.add("small")
 	tr.onclick = test;
 	//tr.onclick = func(arguments[0]);
 	tableEle.appendChild(tr);
 
 
-	let th = document.createElement('th');
-	let td = document.createElement("td");
+	let numtd = document.createElement('th');
+	let nametd = document.createElement('td');
 
-	th.scope = "row";
+	let kihontd = document.createElement('th');
+	let osutd = document.createElement('td');
+	let otetd = document.createElement('td');
+	let dortd = document.createElement('td');
+	let suptd = document.createElement('td');
+	let enttd = document.createElement('td');
+	let opttd = document.createElement('td');
+
+	nametd.scope = "row";
 	if (ch_list[i].chnum < 100){
-		console.log("aaa");
-		th.innerHTML = `0${ch_list[i].chnum}`;
+//		console.log("aaa");
+		numtd.innerHTML = `0${ch_list[i].chnum}`;
 	}else{
-		console.log("bbb");
-		th.innerHTML = ch_list[i].chnum;	
+//		console.log("bbb");
+		numtd.innerHTML = ch_list[i].chnum;	
 	}
 	
-	td.innerHTML = ch_list[i].chname;
+	nametd.innerHTML = ch_list[i].chname;
+	
+	for (let key in ch_list[i].chelement){
+		if (key == "kihon"){
+			let Textnode = document.createTextNode("●") 
+			kihontd.appendChild(Textnode);
+			kihontd.style.textAlign = "center";
+		}
+		if (key == "osu"){
+			let Textnode = document.createTextNode("●") 
+			osutd.appendChild(Textnode);
+			osutd.style.textAlign = "center";
+		}
+		if (key == "ote"){
+			let Textnode = document.createTextNode("●") 
+			otetd.appendChild(Textnode);
+			otetd.style.textAlign = "center";
+		}
+		if (key == "dor"){
+			let Textnode = document.createTextNode("●") 
+			dortd.appendChild(Textnode);
+			dortd.style.textAlign = "center";
+		}
+		if (key == "sup"){
+			let Textnode = document.createTextNode("●") 
+			suptd.appendChild(Textnode);
+			suptd.style.textAlign = "center";
+		}
+		if (key == "ent"){
+			let Textnode = document.createTextNode("●") 
+			enttd.appendChild(Textnode);
+			enttd.style.textAlign = "center";
+		}
+		if (key == "option"){
+			let Textnode = document.createTextNode("●") 
+			opttd.appendChild(Textnode);
+			opttd.style.textAlign = "center";
+		}
+	}
 
-	tr.appendChild(th);
-	tr.appendChild(td);
+	tr.appendChild(nametd);
+	tr.appendChild(numtd);
+	tr.appendChild(kihontd);
+	tr.appendChild(osutd);
+	tr.appendChild(otetd);
+	tr.appendChild(dortd);
+	tr.appendChild(suptd);
+	tr.appendChild(enttd);
+	tr.appendChild(opttd);
+	
 	
 }
 
 function test(e){
-	
+	console.log(e);
+	console.log(e.path[1].id)
 	packDiv.innerHTML = "";
 	optDiv.innerHTML = "";
 	psDiv.innerHTML = "";
 	priceDiv.innerHTML = "";
 	//console.log(`aaa:${option}`)
-	console.log(e.path[1].id);
+//	console.log(e.path[1].id);
 
 	let selectID = e.path[1].id;
+	console.log(`ca1:${selectID}`);
 	let ele = document.getElementById(selectID);
+	console.log(ele);
 	//選択した行を色変更class追加・削除
 	ele.classList.toggle('active');
 
-	let mmm = parseInt(ele.firstElementChild.innerHTML);
-	console.log("-------");
+	let mmm = parseInt(ele.children[1].innerHTML);
+//	console.log("-------");
 	if(pool_ch.includes(mmm)){
 		let index = pool_ch.indexOf(mmm);
 		if (index > -1) {
@@ -85,7 +153,8 @@ function test(e){
 		pool_ch.push(mmm);
 		add(mmm);
 	}
-	console.log(`selected_chList :${pool_ch}`);
+	console.log(`ca2:${mmm}`)
+//	console.log(`selected_chList :${pool_ch}`);
 	
 	
 	//各パックごとのoptionCHリストを作成✓
@@ -95,10 +164,10 @@ function test(e){
 	option = judge();
 	
 	for (let keyname in set_items){
-		if (keyname != 'opt' && judge_items[keyname] == true){
-			create_div(keyname);
+		if (keyname != 'kihon' && keyname != 'opt' && judge_items[keyname] == true){
+			create_div(keyname,mmm);
 		}else if (keyname == 'opt' && judge_items[keyname] == true){
-			create_div(keyname);
+			create_div(keyname,mmm);
 		}
 	}
 	
@@ -108,7 +177,7 @@ function test(e){
 	total_div(total);
 	//console.log(total);
 	
-	console.log(option);
+//	console.log(option);
 	//create_div();
 }
 
@@ -138,10 +207,13 @@ function add(new_ch){
 		if (key == "ent"){
 			set_items["ent"].push(mmm);
 		}
+		if (key == "kihon"){
+			set_items["kihon"].push(mmm)
+		}
 		if (key == "option"){
 			set_items["opt"].push(mmm);
 		}
-		console.log(`func_add-${key} :${set_items[key]}`);
+//		console.log(`func_add-${key} :${set_items[key]}`);
 	}
 	
 };
@@ -176,13 +248,14 @@ function judge(){
 		dor:false,
 		sup:false,
 		ent:false,
+		//kihon:false,
 		opt:false
 	};
 
 	//optをいじる際に一旦optionにコピーしてから使う
 	option = set_items["opt"].concat();
 	//console.log(`bbb:${option}`);
-	console.log("===");
+//	console.log("===");
 	//console.log(judge_items);
 	if (set_items["osu"].length != 0){
 		judge_items["osu"] = true;
@@ -247,12 +320,17 @@ function compare_pack(array04, array05, nameOfarray05){
 	}
 }
 
-function create_div(keyname){
+function create_div(keyname,mmm){
 	let available = document.getElementById("Available-pack");
 	let option_list = document.getElementById("option-list");
 	let div = document.createElement("div");
 	let h1 = document.createElement("h1");
-	h1.classList = 'fs-5'
+	let p = document.createElement("p");
+	
+	let index = getIndex(mmm,ch_list,"chnum");
+	let namenode = document.createTextNode(ch_list[index].chname);
+
+	h1.classList = 'fs-5';
 	div.id = keyname;
 	div.classList = 'border border-3 round mt-2 ml-1 p-1 mb-2';
 	if (keyname == "osu"){
@@ -298,9 +376,11 @@ function create_div(keyname){
 		for (let i = 0; i < option.length; i++){
 			let index = getIndex(option[i], ch_list, "chnum")
 			let name = ch_list[index].chname;
-			let p = document.createElement("p");
+//			let p = document.createElement("p");
 			let chnode = document.createTextNode(name);
+			let br = document.createElement("br");
 			p.appendChild(chnode);
+			p.appendChild(br);
 			div.appendChild(p);
 		}
 		option_list.appendChild(div);
@@ -310,7 +390,7 @@ function create_div(keyname){
 function total_div(price){
 	let div = document.getElementById("price");
 	let p = document.createElement("p");
-	let textnode = document.createTextNode(`合計 ${price}`);
+	let textnode = document.createTextNode(`合計 ${price} 円(税込)`);
 	p.appendChild(textnode);
 	div.appendChild(p);
 }
@@ -327,7 +407,7 @@ function price_pack(judge_items){
 	price = 0;
 	let ji = judge_items;
 	for (let key in ji){
-		if(key != "opt" && judge_items[key] == true){
+		if(key != "kihon" && key != "opt" && judge_items[key] == true){
 			price = price + pack_list[key].price
 		}
 	}
@@ -337,41 +417,37 @@ function price_pack(judge_items){
 function price_option(option_list){
 	let price = 0;
 	let opt = option_list.concat();
-	console.log(`before:${opt}`);
 	opt = opt.sort(f);
-	console.log(`after;${opt}`);
+//optがあれば"single"か"set"は判定
 	for (let i = 0; i < opt.length; i ++){
-		console.log(`a:${i}`);
 		let index = getIndex(opt[i],ch_list,"chnum")
 		if(index == -1){
-			console.log(`Error:${opt[i]}`);
 			continue;
 		}
 		let cl = ch_list[index]
+//"set"の場合、相方がいるかの確認。存在すれば相方を消してセット料金を出す。
 		if (cl.chelement.option.includes("set")){
-			console.log(`b;${opt[i]}`);
-			let target = cl.chelement.set;
-			console.log(`target:${target}`);
-			if (opt.includes(target)){
-				for (let key in opt){
-					if (opt.includes(target)){
-						let reindex = opt.indexOf(target);
-						
-						opt.splice(reindex, 1);
+			for (let j = 0; j < ch_list[0].chelement.set.length; j ++){
+				let target = cl.chelement.set[j];
+				if (opt.includes(target)){
+					for (let key in opt){
+						if (opt.includes(target)){
+							let reindex = opt.indexOf(target);
+							opt.splice(reindex, 1);
+						}
+					}
+					price = price + cl.price.set;
+//"set"で相方いなくとも"single"料金が存在しなければ単体でもセット料金を出す。"
+				}else{
+					if (!cl.chelement.option.includes("single")){
+						price = price + cl.price.set;
+					}else{
+						price = price + cl.price.single;
 					}
 				}
-				price = price + cl.price.set;
-			}else{
-				console.log("d");
-				if (!cl.chelement.option.includes("single")){
-					price = price + cl.price.set;
-				}else{
-					price = price + cl.price.single;
-				}
-				console.log(`d:${price}`);
 			}
+//"setがなければ"single"料金で
 		}else{
-			console.log("c");
 			price = price + cl.price.single;
 		}
 	}
